@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Laporan Bukti Dukung Lomba HAB Madrasah Ekoteologi</title>
+<style>
+*{box-sizing:border-box}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{margin:0;background:#f1f5f9;font-family:'Segoe UI',Arial,sans-serif;color:#0f172a}
+header{background:#14532d;border-bottom:4px solid #c9a227;padding:14px 24px;position:sticky;top:0;z-index:10;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+header h1{margin:0;font-size:19px;color:#fff}header p{margin:2px 0 0;font-size:12px;color:#bbf7d0}
+.btn{border:2px solid #14532d;background:#fff;padding:9px 16px;font-weight:800;font-size:13px;cursor:pointer}
+.g{background:#c9a227}.pur{background:#7e22ce;color:#fff;border-color:#581c87}.dk{background:#14532d;color:#fff}.red{background:#fecaca;padding:3px 9px;border-color:#b91c1c}
+main{max-width:1200px;margin:0 auto;padding:20px 16px;display:flex;flex-direction:column;gap:20px}
+.panel{background:#fff;border:2px solid #cbd5e1;padding:18px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}@media(max-width:850px){.grid{grid-template-columns:1fr}}
+.box{border:2px solid #e2e8f0;background:#f8fafc;padding:14px;margin-bottom:14px}
+.box h3{margin:0 0 8px;font-size:13px;text-transform:uppercase;color:#14532d}
+label{display:block;font-size:12px;font-weight:700;margin:9px 0 3px}small{color:#64748b;font-weight:400}
+input,textarea,select{width:100%;border:2px solid #cbd5e1;padding:8px;font:inherit;font-size:14px;background:#fff}
+input:focus,textarea:focus{outline:none;border-color:#15803d}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ai{background:#f3e8ff;border-color:#d8b4fe}
+#warn{background:#fef9c3;border:2px solid #c9a227;padding:10px 14px;font-size:13px}
+.fi{display:flex;gap:8px;align-items:center;margin-top:8px;background:#fff;border:1px solid #cbd5e1;padding:6px}
+.fi img{width:56px;height:56px;object-fit:cover}.fi select{width:auto}
+#toast{position:fixed;bottom:20px;right:20px;background:#c9a227;border:3px solid #14532d;padding:10px 16px;font-weight:800;font-size:13px;z-index:99;display:none}
+#modal{position:fixed;inset:0;background:rgba(15,23,42,.6);display:none;align-items:center;justify-content:center;z-index:50;padding:16px}
+#modal>div{background:#fff;border:3px solid #14532d;max-width:640px;width:100%;padding:22px}#modal li{margin-bottom:8px}
+footer{background:#14532d;border-top:4px solid #c9a227;color:#e2e8f0;text-align:center;padding:14px;font-size:13px;font-weight:700;text-transform:uppercase}
+/* ===== Kertas: A4, margin kiri 4 / atas 4 / kanan 3 / bawah 3 cm ===== */
+#paper{background:#e2e8f0;border:2px solid #cbd5e1;padding:20px;display:flex;flex-direction:column;align-items:center;gap:26px}
+.pg{width:210mm;min-height:297mm;padding:40mm 30mm 30mm 40mm;background:#fff;color:#000;font:12pt/1.5 "Times New Roman",Times,serif;box-shadow:0 1px 6px #0003}
+.pg.cv{padding:20mm}
+.pg *{font-family:"Times New Roman",Times,serif}
+.pg p{margin:0;text-align:justify;text-indent:1.25cm}
+.pg h1{font-size:14pt;font-weight:bold;text-align:center;text-transform:uppercase;color:#000;margin:0 0 14pt}
+.pg h2{font-size:12pt;font-weight:bold;text-align:left;margin:12pt 0 3pt}
+.pg h3{font-size:12pt;font-weight:bold;font-style:italic;margin:6pt 0 2pt}
+.pg ol{margin:0 0 4pt;padding-left:1.9em}.pg li{text-align:justify}
+.pg table{width:100%;border-collapse:collapse;font-size:11pt;line-height:1.3;margin:4pt 0}
+.pg td,.pg th{border:0;padding:3px 7px;vertical-align:top;text-align:left}
+.pg td:first-child{width:32%;font-weight:bold}
+.pg table.tb td{border:1px solid #000}
+.cover{padding:0;height:256mm;display:flex;flex-direction:column;text-align:center;line-height:1.35}
+.cover .band{margin:0;padding:0}
+.ttl{text-wrap:balance;max-width:150mm;font-size:20pt;font-weight:bold;text-transform:uppercase;color:#000;line-height:1.25}
+.gal{display:grid;grid-template-columns:1fr;gap:12px}
+.gal figure,.doc{margin:0;border:0;padding:5px;text-align:center;break-inside:avoid}
+.gal img{width:100%;height:88mm;object-fit:contain}.doc{margin-bottom:8px}.doc img{width:100%;height:165mm;object-fit:contain}
+figcaption{font-size:10pt;line-height:1.25;margin-top:3px}
+.ttd{display:flex;justify-content:space-between;margin-top:26pt;break-inside:avoid;line-height:1.3}.ttd div{width:46%}.ttd .sp{height:70px}
+.kosong{color:#94a3b8;font-style:italic}
+@page{size:A4;margin:0}
+.sheet{height:296.5mm;min-height:0;overflow:hidden;position:relative}
+.sheet .sb{display:flow-root}.sb>:first-child{margin-top:0!important}
+.sb ol{margin:0}.sb .gal{margin-bottom:12px}
+.pn{position:absolute;left:0;right:0;bottom:15mm;text-align:center;font-size:10pt}
+@media screen{[contenteditable=true]:hover{background:#f0fdf4}[contenteditable=true]:focus{outline:1px dashed #15803d;background:#f7fee7}}
+@media print{
+ [contenteditable]{outline:none!important;background:none!important}
+ body{background:#fff}.no-print,header,footer{display:none!important}
+ main{padding:0;max-width:none;display:block}#paper{padding:0;border:0;background:#fff;gap:0;display:block}
+ .pg{margin:0;box-shadow:none;break-after:page}.pg:last-child{break-after:auto}
+}
+</style>
+</head>
+<body>
+<header class="no-print">
+ <div><h1>LAPORAN BUKTI DUKUNG LOMBA HAB MADRASAH EKOTEOLOGI</h1><p>MIN 10 Magetan – Generator laporan kegiatan (PDF)</p></div>
+ <div style="display:flex;gap:10px"><button class="btn g" onclick="modal(1)">PETUNJUK</button><button class="btn" onclick="window.print()">CETAK / SIMPAN PDF</button></div>
+</header>
+<div id="modal" onclick="if(event.target===this)modal(0)"><div>
+ <h2 style="margin-top:0">Petunjuk Penggunaan</h2>
+ <ol>
+  <li>Isi nama, waktu, tempat, penanggung jawab, pihak terlibat, dan <b>Catatan bahan</b> dengan bahasa sehari-hari. Jangan mengarang data.</li>
+  <li>Klik <b>Salin Instruksi Gemini</b>, tempel di Gemini, lalu tempel JSON hasilnya ke kotak ungu dan klik <b>Proses</b>. Semua bagian narasi (latar belakang sampai saran) terisi otomatis dan masih bisa diedit.</li>
+  <li>Unggah foto kegiatan dan dokumen pendukung (surat tugas, daftar hadir, poster, dll.) beserta keterangannya.</li>
+  <li>Bagian yang kosong otomatis tidak dicetak. Kotak kuning menunjukkan data yang perlu dilengkapi.</li>
+  <li>Klik <b>CETAK / SIMPAN PDF</b> memakai Chrome/Edge: ukuran A4, matikan <i>Headers and footers</i>, nyalakan <i>Background graphics</i>. Pratinjau di layar sama dengan hasil PDF (margin dan nomor halaman sudah diatur di dalam halaman). Nama file otomatis mengikuti judul kegiatan.</li>
+ </ol><button class="btn g" style="width:100%" onclick="modal(0)">SAYA MENGERTI</button></div></div>
+
+<main>
+<section class="panel no-print">
+ <h2 style="margin:0 0 14px;font-size:14px;text-transform:uppercase">Kolom Isian Laporan</h2>
+ <div id="warn"></div><br>
+ <div class="grid"><div id="colA"></div><div id="colB"></div></div>
+</section>
+<section class="panel ai no-print">
+ <h3 style="margin:0 0 8px;font-size:13px;text-transform:uppercase;color:#581c87">Penyusun Narasi (Gemini)</h3>
+ <button class="btn pur" style="width:100%" onclick="copyPrompt()">1. SALIN INSTRUKSI GEMINI (berisi bahan yang sudah diisi)</button>
+ <label>Tempel JSON dari Gemini:</label>
+ <textarea id="json" rows="3" style="font-family:monospace" placeholder='{ "latar": ..., "tujuan": ... }'></textarea>
+ <button class="btn dk" style="width:100%;margin-top:8px" onclick="procJSON()">2. PROSES &amp; MASUKKAN KE LAPORAN</button>
+</section>
+<p class="no-print" style="margin:0;font-size:13px;background:#dcfce7;border:2px solid #86efac;padding:8px 12px"><b>Pratinjau bisa diedit langsung:</b> klik teks paragraf atau poin daftar pada kertas lalu ketik. Halaman disusun ulang otomatis saat kursor keluar dari kertas. Judul, tabel, dan sampul diubah lewat kolom isian.</p>
+<section id="paper"></section>
+</main>
+<footer>2026 – Pengembang Kurikulum MIN 10 Magetan</footer>
+<div id="toast"></div>
+
+<script>
+const $=id=>document.getElementById(id);
+const BLN=["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
+/* [id,label,tipe(t/d/l/p),baris,placeholder,kolom,default] l=daftar per baris, p=paragraf */
+const F=[
+["keg","1. Nama kegiatan / program","t",0,"Contoh: Gerakan Pilah Sampah dan Bank Sampah Madrasah","A",""],
+["mulai","2. Tanggal mulai","d",0,"","A",""],["selesai","Tanggal selesai","d",0,"","A",""],
+["tempat","Tempat pelaksanaan","t",0,"Halaman dan ruang kelas MIN 10 Magetan","A",""],
+["pj","3. Penanggung jawab","t",0,"Nama / jabatan penanggung jawab kegiatan","A","IFAN SHOVI, S.Pd"],
+["pihak","Pihak yang terlibat (satu per baris)","l",3,"Guru, siswa kelas IV–VI, komite madrasah...","A",""],
+["catatan","Catatan bahan kegiatan (bahasa sehari-hari / poin singkat)","p",9,"Tulis apa adanya: alasan kegiatan, tujuan, apa yang dilakukan, siapa terlibat, hasil nyata (angka bila ada), dampak yang terlihat, rencana lanjutan. Jangan dikarang; Gemini yang menyusunnya menjadi laporan.","A",""],
+["latar","4. Latar belakang / alasan kegiatan","p",4,"Mengapa kegiatan ini dilaksanakan?","C",""],
+["tujuan","5. Tujuan kegiatan (satu per baris)","l",3,"","C",""],
+["uraian","6. Proses pelaksanaan (apa, siapa, bagaimana)","p",5,"Pisahkan paragraf dengan baris kosong","C",""],
+["hasil","7. Hasil nyata (satu per baris)","l",3,"Sertakan angka bila ada: jumlah peserta, volume sampah, dll.","C",""],
+["dampak","8. Dampak / perubahan yang terlihat (satu per baris)","l",3,"","C",""],
+["tl","9. Rencana tindak lanjut / keberlanjutan (satu per baris)","l",3,"","C",""],
+["dasar","Dasar pelaksanaan (opsional, satu per baris)","l",2,"Surat tugas / SK / juknis lomba (hanya yang pasti)","C",""],
+["sasaran","Sasaran kegiatan (satu per baris)","l",2,"","C",""],
+["tahapan","Tahapan pelaksanaan (satu per baris)","l",3,"Persiapan, pelaksanaan, evaluasi","C",""],
+["mina","Ekoteologi: Hablum Minallah","p",2,"Menjaga alam sebagai wujud ketaatan & syukur kepada Allah SWT","C",""],
+["minn","Ekoteologi: Hablum Minannas","p",2,"Menjaga lingkungan demi kemaslahatan bersama","C",""],
+["mial","Ekoteologi: Hablum Minal Alam","p",2,"Hubungan harmonis & bertanggung jawab terhadap alam","C",""],
+["khal","Ekoteologi: Amanah sebagai khalifah di bumi","p",2,"","C",""],
+["evaluasi","Evaluasi kegiatan (opsional)","p",3,"","C",""],
+["simpul","Kesimpulan","p",3,"","C",""],
+["saran","Saran (satu per baris)","l",2,"","C",""],
+["kepala","Kepala Madrasah","t",0,"","B","Dra. SEKAR MLATI"],["k_nip","NIP Kepala Madrasah","t",0,"","B","196810271998032002"],
+["pj_nip","NIP penanggung jawab","t",0,"","B","199304102025051002"],
+["kota","Kota penandatanganan","t",0,"","B","Magetan"],["tgl","Tanggal laporan","d",0,"","B",""],["tahun","Tahun (sampul)","t",0,"","B","2026"]];
+const REQ=["keg","mulai","tempat","pj","latar","tujuan","uraian","hasil","dampak","tl","simpul"];
+const KAT=["Surat Tugas","Daftar Hadir","Poster / Publikasi","Hasil Karya","Dokumen Lainnya"];
+let FOTO=[],DOC=[],KEG=[];
+const esc=s=>String(s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const tgl=v=>{if(!v)return"";const p=v.split("-");return `${+p[2]} ${BLN[+p[1]-1]} ${p[0]}`};
+const g=id=>$(id).value.trim();
+const lines=s=>s.split(/\n+/).map(x=>x.replace(/^\s*(\d+[.)]|[-•*])\s*/,"").trim()).filter(Boolean);
+const OL=(s,id)=>`<ol${id?` data-f="${id}"`:""}>${lines(s).map(x=>`<li>${esc(x)}</li>`).join("")}</ol>`;
+const PR=(s,id)=>s.split(/\n\s*\n/).map(x=>x.trim()).filter(Boolean).map((x,i)=>`<p${id?` data-f="${id}" data-pi="${i}"`:""}>${esc(x).replace(/\n/g,"<br>")}</p>`).join("");
+const toast=m=>{const t=$("toast");t.textContent=m;t.style.display="block";clearTimeout(t._t);t._t=setTimeout(()=>t.style.display="none",3200)};
+const modal=o=>$("modal").style.display=o?"flex":"none";
+const rentang=()=>{const a=g("mulai"),b=g("selesai");return a?(b&&b!==a?`${tgl(a)} s.d. ${tgl(b)}`:tgl(a)):""};
+const body=(id)=>{const f=F.find(x=>x[0]===id),v=g(id);return !v?"":f[2]==="l"?OL(v,id):PR(v,id)};
+
+function build(){
+ const mk=(k)=>F.filter(f=>f[5]===k).map(f=>`<label>${f[1]}</label>`+(f[3]?`<textarea id="${f[0]}" rows="${f[3]}" placeholder="${f[4]}"></textarea>`:`<input id="${f[0]}" type="${f[2]==="d"?"date":"text"}" placeholder="${f[4]}">`)).join("");
+ const fotoBox=`<div class="box"><h3>10. Bukti pendukung — Foto kegiatan</h3><input type="file" accept="image/*" multiple onchange="addImg(FOTO,this,1000)"><div id="fl"></div></div>
+ <div class="box"><h3>Dokumen pendukung (foto/scan)</h3><input type="file" accept="image/*" multiple onchange="addImg(DOC,this,1600)"><div id="dl"></div></div>`;
+ $("colA").innerHTML=`<div class="box"><h3>Tahap 1 — Bahan Kegiatan (isi sederhana)</h3>${mk("A")}</div>`+`<div class="box"><h3>Rincian Kegiatan (tambah sesuai jumlah kegiatan)</h3><p style="font-size:12px;margin:0 0 6px">Jika program terdiri dari beberapa kegiatan, tambahkan satu per satu. Tampil di BAB II sebagai sub-subbab 1, 2, 3, dst.</p><div id="xl"></div><button class="btn g" style="width:100%;margin-top:8px" onclick="KEG.push({k:\'\',w:\'\',v:\'\'});kegUI()">+ TAMBAH KEGIATAN</button></div>`+fotoBox;
+ $("colB").innerHTML=`<div class="box" style="background:#f3e8ff"><h3>Hasil dari Gemini (otomatis, boleh diedit)</h3><p style="font-size:12px;margin:0 0 6px">Latar belakang, tujuan, proses, hasil, dampak, RTL, ekoteologi, kesimpulan, dan saran terisi dari JSON Gemini (panel ungu di bawah).</p>
+ <details><summary style="cursor:pointer;font-weight:700;font-size:13px">Lihat / edit isi hasil Gemini</summary>${mk("C")}</details></div>
+ <div class="box"><h3>Penandatanganan</h3>${mk("B")}
+ <label style="display:flex;gap:8px;align-items:center;margin-top:12px"><input type="checkbox" id="sah" checked style="width:auto"> Sertakan Halaman Pengesahan</label></div>`;
+}
+function kegUI(){$("xl").innerHTML=KEG.map((r,j)=>`<div class="fi" style="flex-wrap:wrap"><input placeholder="Nama kegiatan ${j+1}" value="${esc(r.k)}" oninput="KEG[${j}].k=this.value;render()"><input placeholder="Waktu (mis. Senin, 3 November 2026)" value="${esc(r.w)}" oninput="KEG[${j}].w=this.value;render()"><textarea rows="3" placeholder="Uraian singkat kegiatan" oninput="KEG[${j}].v=this.value;render()">${esc(r.v)}</textarea><button class="btn red" onclick="KEG.splice(${j},1);kegUI();render()">Hapus</button></div>`).join("")}
+function imgs(arr,box,withKat){
+ $(box).innerHTML=arr.map((f,j)=>`<div class="fi"><img src="${f.src}"><input value="${esc(f.cap)}" placeholder="Keterangan" oninput="${arr===FOTO?"FOTO":"DOC"}[${j}].cap=this.value;render()">${withKat?`<select onchange="DOC[${j}].kat=this.value;render()">${KAT.map(k=>`<option${k===f.kat?" selected":""}>${k}</option>`).join("")}</select>`:""}<button class="btn red" onclick="${arr===FOTO?"FOTO":"DOC"}.splice(${j},1);imgs(${arr===FOTO?"FOTO":"DOC"},'${box}',${withKat});render()">Hapus</button></div>`).join("");
+}
+function addImg(arr,inp,m){
+ [...inp.files].forEach(file=>{const rd=new FileReader();rd.onload=e=>{const im=new Image();im.onload=()=>{
+  const s=Math.min(1,m/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=im.width*s;c.height=im.height*s;
+  c.getContext("2d").drawImage(im,0,0,c.width,c.height);
+  arr.push({src:c.toDataURL("image/jpeg",.82),cap:"",kat:KAT[0]});
+  arr===FOTO?imgs(FOTO,"fl",0):imgs(DOC,"dl",1);render()};im.src=e.target.result};rd.readAsDataURL(file)});inp.value="";
+}
+
+function render(){
+ const keg=g("keg"),nm=keg?esc(keg):'<span class="kosong">NAMA KEGIATAN</span>',thn=esc(g("tahun")||"2026");
+ const miss=REQ.filter(i=>!g(i)).map(i=>F.find(f=>f[0]===i)[1].replace(/^\d+\.\s*/,""));if(!FOTO.length)miss.push("Foto kegiatan");
+ $("warn").innerHTML=miss.length?`<b>Data yang perlu dilengkapi:</b> ${miss.join(", ")}. <small>(bagian kosong tidak dicetak)</small>`:"✔ Bahan pokok sudah lengkap.";
+ document.title="Laporan_"+(keg.replace(/[^A-Za-z0-9]+/g,"_").replace(/^_|_$/g,"")||"Kegiatan")+"_MIN10Magetan_"+thn;
+ const tg=g("tgl")?tgl(g("tgl")):(()=>{const d=new Date();return `${d.getDate()} ${BLN[d.getMonth()]} ${d.getFullYear()}`})();
+ const ttd=`<div class="ttd"><div>Mengetahui,<br>Kepala MIN 10 Magetan,<div class="sp"></div><b>${esc(g("kepala"))||"........"}</b><br>NIP. ${esc(g("k_nip"))||"........"}</div>
+  <div>${esc(g("kota"))}, ${tg}<br>Penanggung Jawab,<div class="sp"></div><b>${esc(g("pj"))||"........"}</b><br>NIP. ${esc(g("pj_nip"))||"........"}</div></div>`;
+ /* sampul */
+ let h=`<div class="pg sheet cv"><div class="cover">
+  <div style="margin:0 auto;width:140px;height:140px;flex:none"><img src="https://i.ibb.co.com/9kBmvppK/LOGO-MIN-TERBARU-u.png" alt="Logo" style="width:100%;height:100%;object-fit:contain" onerror="this.style.display='none'"></div>
+  <div style="flex:1;display:flex;flex-direction:column;align-items:center;margin-top:30mm">
+   <div style="font-size:16pt;font-weight:bold">LAPORAN PELAKSANAAN KEGIATAN</div>
+   <div class="ttl" style="margin-top:10mm">${nm}</div>
+   ${g("pj")?`<div style="margin-top:30mm">Disusun oleh:<br><b>${esc(g("pj"))}</b></div>`:""}</div>
+  <div style="font-size:12pt;font-weight:bold;text-transform:uppercase">MADRASAH IBTIDAIYAH NEGERI 10 MAGETAN<br>KANTOR KEMENTERIAN AGAMA KABUPATEN MAGETAN</div>
+  <div style="font-size:10pt;margin-top:4px">Jln. Kopek Ronggo Galih, Desa Sidorejo, Kecamatan Sidorejo, Kabupaten Magetan</div>
+  <div style="font-size:13pt;font-weight:bold;margin-top:6px">${thn}</div></div></div>`;
+ if($("sah").checked)h+=`<div class="pg"><h1>Halaman Pengesahan</h1>
+  <p style="text-indent:0;text-align:center">Laporan Bukti Dukung Lomba HAB Madrasah Ekoteologi dengan kegiatan:</p>
+  <p style="text-indent:0;text-align:center;font-weight:bold;margin:8pt 0">${nm}</p>
+  <p style="text-indent:0;text-align:center">telah disusun dan disahkan oleh Kepala MIN 10 Magetan sebagai bukti dukung pelaksanaan kegiatan.</p>${ttd}</div>`;
+ /* subbab huruf kapital otomatis */
+ const chap=(no,t,items)=>{let L=0;const inner=items.map(([jud,c])=>c?`<h2>${String.fromCharCode(65+L++)}. ${jud}</h2>${c}`:"").join("");
+  return `<div class="pg"><h1>BAB ${no}<br>${t}</h1>${inner}</div>`};
+ h+=chap("I","Pendahuluan",[["Latar Belakang",body("latar")],["Dasar Pelaksanaan",body("dasar")],["Tujuan Kegiatan",body("tujuan")],["Sasaran Kegiatan",body("sasaran")]]);
+ const idt=`<table class="tb"><tr><td>Nama Kegiatan</td><td>${nm}</td></tr><tr><td>Madrasah</td><td>MIN 10 Magetan</td></tr>
+  <tr><td>Alamat</td><td>Jln. Kopek Ronggo Galih, Desa Sidorejo, Kecamatan Sidorejo, Kabupaten Magetan</td></tr>
+  <tr><td>Visi Madrasah</td><td style="font-weight:normal">Terwujudnya generasi yang bertaqwa kepada Allah, optimal dalam prestasi dan berbudaya lingkungan.</td></tr>
+  ${g("pj")?`<tr><td>Penanggung Jawab</td><td>${esc(g("pj"))}</td></tr>`:""}</table>`;
+ const rk=KEG.filter(r=>r.k.trim()).map((r,j)=>`<h3>${j+1}. ${esc(r.k.trim())}</h3>${r.w.trim()?`<p style="text-indent:0">Waktu: ${esc(r.w.trim())}</p>`:""}${PR(r.v||"","k:"+j)}`).join("");
+ const wkt=(rentang()||g("tempat"))?`<table class="tb">${rentang()?`<tr><td>Waktu</td><td>${rentang()}</td></tr>`:""}${g("tempat")?`<tr><td>Tempat</td><td>${esc(g("tempat"))}</td></tr>`:""}</table>`:"";
+ h+=chap("II","Pelaksanaan Kegiatan",[["Identitas Kegiatan",idt],["Waktu dan Tempat",wkt],["Pihak yang Terlibat",body("pihak")],["Tahapan Pelaksanaan",body("tahapan")],["Rincian Kegiatan",rk],["Deskripsi Kegiatan",body("uraian")]]);
+ let n=0;const eko=[["mina","Hablum Minallah"],["minn","Hablum Minannas"],["mial","Hablum Minal Alam"],["khal","Amanah sebagai Khalifah di Bumi"]]
+  .map(([i,t])=>g(i)?`<h3>${++n}. ${t}</h3>${PR(g(i),i)}`:"").join("");
+ const ev=(g("evaluasi")?`<h3>1. Evaluasi Kegiatan</h3>${PR(g("evaluasi"),"evaluasi")}`:"")+(g("tl")?`<h3>${g("evaluasi")?2:1}. Rencana Tindak Lanjut</h3>${OL(g("tl"),"tl")}`:"");
+ h+=chap("III","Hasil dan Pembahasan",[["Hasil Pelaksanaan",body("hasil")],["Integrasi Nilai-Nilai Ekoteologi Islam",eko],["Dampak Kegiatan",body("dampak")],["Evaluasi dan Tindak Lanjut",ev]]);
+ h=h.replace(/(BAB IV)/,"$1");
+ let iv=chap("IV","Penutup",[["Kesimpulan",body("simpul")],["Saran",body("saran")]]);
+ if(!$("sah").checked)iv=iv.replace(/<\/div>$/,ttd+"</div>");
+ h+=iv;
+ /* lampiran */
+ let lm=0,L="";
+ if(FOTO.length)L+=`<h2>Lampiran ${++lm}. Foto Kegiatan</h2><div class="gal">${FOTO.map((f,j)=>`<figure><img src="${f.src}" alt=""><figcaption>Gambar ${j+1}. ${esc(f.cap)||"Dokumentasi kegiatan"}</figcaption></figure>`).join("")}</div>`;
+ KAT.forEach(k=>{const d=DOC.filter(x=>x.kat===k);if(d.length)L+=`<h2>Lampiran ${++lm}. ${k}</h2>${d.map(x=>`<div class="doc"><img src="${x.src}" alt=""><figcaption>${esc(x.cap)||k}</figcaption></div>`).join("")}`});
+ if(L)h+=`<div class="pg"><h1>Lampiran Bukti Dukung</h1>${L}</div>`;
+ $("paper").innerHTML=h;paginate();
+ try{const d={};F.forEach(f=>d[f[0]]=$(f[0]).value);d.sah=$("sah").checked;d.keg=KEG;localStorage.setItem("hab_ekoteologi_v1",JSON.stringify(d))}catch(e){}
+}
+
+/* ===== Paginasi: pratinjau = PDF (A4, isi 140 x 227 mm, margin 4/4/3/3 cm) ===== */
+function paginate(){
+ const P=$("paper"),t=document.createElement("div");t.style.cssText="height:227mm;position:absolute;visibility:hidden";document.body.appendChild(t);const LIM=t.offsetHeight;t.remove();
+ const secs=[...P.children];secs.forEach(x=>x.remove());
+ const sheets=[];let body;
+ const mk=()=>{const s=document.createElement("div");s.className="pg sheet";const b=document.createElement("div");b.className="sb";const n=document.createElement("div");n.className="pn";s.append(b,n);P.appendChild(s);sheets.push(n);body=b};
+ const fit=()=>body.offsetHeight<=LIM;
+ const split=p=>{const w=p.innerHTML.split(" ");if(w.length<12)return null;const a=p.cloneNode(false);body.appendChild(a);let lo=0,hi=w.length-1;
+  while(lo<hi){const m=Math.ceil((lo+hi)/2);a.innerHTML=w.slice(0,m).join(" ");fit()?lo=m:hi=m-1}
+  body.removeChild(a);if(lo<8||w.length-lo<4)return null;
+  a.innerHTML=w.slice(0,lo).join(" ");a.style.textAlignLast="justify";const b=p.cloneNode(false);b.innerHTML=w.slice(lo).join(" ");b.style.textIndent="0";return[a,b]};
+ secs.forEach(sec=>{
+  if(sec.classList.contains("cv")){P.appendChild(sec);sheets.push(null);return}
+  const q=[];[...sec.children].forEach(c=>{
+   if(c.tagName==="OL")[...c.children].forEach((li,j)=>{const o=document.createElement("ol");o.start=j+1;if(c.dataset.f)o.dataset.f=c.dataset.f;o.appendChild(li);q.push(o)});
+   else if(c.classList.contains("gal"))[...c.children].forEach(f=>{const d=document.createElement("div");d.className="gal";d.appendChild(f);q.push(d)});
+   else q.push(c)});
+  mk();
+  while(q.length){
+   const el=q.shift();body.appendChild(el);if(fit())continue;body.removeChild(el);
+   if(el.tagName==="P"&&body.children.length){const r=split(el);if(r){body.appendChild(r[0]);q.unshift(r[1]);mk();continue}}
+   if(!body.children.length){body.appendChild(el);mk();continue}
+   const mv=[];while(body.children.length>1&&/^H[123]$/.test(body.lastElementChild.tagName))mv.unshift(body.removeChild(body.lastElementChild));
+   mk();q.unshift(...mv,el)}
+  if(!body.children.length){body.parentNode.remove();sheets.pop()}
+ });
+ sheets.forEach((n,i)=>{if(n)n.textContent=i+1});
+ P.querySelectorAll("p[data-f],ol[data-f] li").forEach(e=>e.contentEditable="true");
+}
+
+/* ===== Edit langsung di pratinjau ===== */
+let dirty=false;
+function sync(){
+ const P=$("paper"),M={};
+ P.querySelectorAll("[data-f]").forEach(el=>{const f=el.dataset.f,o=M[f]||(M[f]={p:{},l:[]});
+  if(el.tagName==="P"){const i=+el.dataset.pi;o.p[i]=(o.p[i]?o.p[i]+" ":"")+el.innerText.trim()}
+  else o.l.push(...[...el.children].map(li=>li.innerText.trim()).filter(Boolean))});
+ Object.keys(M).forEach(f=>{const o=M[f],pk=Object.keys(o.p).sort((a,b)=>a-b);
+  const v=pk.length?pk.map(i=>o.p[i]).join("\n\n"):o.l.join("\n");
+  if(f.startsWith("k:"))KEG[+f.slice(2)].v=v;else $(f).value=v});
+ try{const d={};F.forEach(f=>d[f[0]]=$(f[0]).value);d.sah=$("sah").checked;d.keg=KEG;localStorage.setItem("hab_ekoteologi_v1",JSON.stringify(d))}catch(e){}
+}
+$("paper").addEventListener("input",e=>{if(e.target.closest&&e.target.closest("[data-f]")){dirty=true;sync()}});
+$("paper").addEventListener("focusout",()=>{clearTimeout(window._ft);window._ft=setTimeout(()=>{if(dirty&&!$("paper").contains(document.activeElement)){dirty=false;kegUI();render()}},250)});
+
+/* ===== Gemini ===== */
+const KEYS=["latar","dasar","tujuan","sasaran","tahapan","uraian","hasil","dampak","tl","mina","minn","mial","khal","evaluasi","simpul","saran"];
+function copyPrompt(){
+ const bahan=F.filter(f=>g(f[0])&&["keg","mulai","selesai","tempat","pj","pihak","catatan"].includes(f[0])).map(f=>`- ${f[1]}: ${g(f[0])}`).join("\n")+(KEG.filter(r=>r.k.trim()).length?"\n- Rincian kegiatan:\n"+KEG.filter(r=>r.k.trim()).map((r,j)=>`  ${j+1}. ${r.k} | ${r.w} | ${r.v}`).join("\n"):"");
+ if(!g("keg")||!g("catatan"))return toast("Isi nama kegiatan dan catatan bahan dulu.");
+ const t=`Bertindaklah sebagai tenaga ahli penyusun laporan kegiatan pendidikan, lingkungan hidup, dan ekoteologi madrasah untuk Lomba HAB Madrasah Ekoteologi Kementerian Agama (MIN 10 Magetan; visi: Terwujudnya generasi yang bertaqwa kepada Allah, optimal dalam prestasi dan berbudaya lingkungan).
+Rapikan BAHAN berikut menjadi bahasa Indonesia baku sesuai EYD, formal, objektif, efektif, tanpa bahasa promosi atau klaim berlebihan.
+ATURAN: hanya gunakan informasi dari bahan; JANGAN mengarang tanggal, jumlah, hasil, dampak, bukti, kutipan ayat/hadis, atau peraturan; bila suatu bagian tidak punya dasar informasi, isi dengan string kosong "". Bedakan hasil langsung, dampak, dan tindak lanjut. Hubungkan dengan nilai ekoteologi (Hablum Minallah, Hablum Minannas, Hablum Minal Alam, khalifah di bumi) secara relevan saja.
+BAHAN:
+${bahan}
+Berikan HANYA kode JSON dalam blok kode. Untuk daftar, pisahkan per baris dengan \\n; untuk paragraf, pisahkan dengan \\n\\n:
+{"latar":"1-2 paragraf","dasar":"","tujuan":"daftar","sasaran":"daftar","tahapan":"daftar tahapan","uraian":"1-3 paragraf deskripsi kegiatan","hasil":"daftar","dampak":"daftar","tl":"daftar","mina":"1 paragraf pendek atau kosong","minn":"...","mial":"...","khal":"...","evaluasi":"paragraf atau kosong","simpul":"1-2 paragraf","saran":"daftar"}`;
+ (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>toast("Instruksi disalin. Tempel di Gemini.")).catch(()=>{const a=document.createElement("textarea");a.value=t;document.body.appendChild(a);a.select();document.execCommand("copy");a.remove();toast("Instruksi disalin.")});
+}
+function procJSON(){
+ let s=g("json");if(!s)return toast("Kotak JSON masih kosong.");
+ try{s=s.replace(/^```(json)?/i,"").replace(/```$/,"").trim();const j=JSON.parse(s);
+  KEYS.forEach(k=>{if(j[k])$(k).value=Array.isArray(j[k])?j[k].join("\n"):j[k]});render();toast("Berhasil dimasukkan ke laporan.")}
+ catch(e){toast("Format JSON salah. Salin ulang dari Gemini.")}
+}
+
+window.addEventListener("DOMContentLoaded",()=>{
+ build();
+ let d=null;try{d=JSON.parse(localStorage.getItem("hab_ekoteologi_v1")||"null")}catch(e){}
+ F.forEach(f=>{$(f[0]).value=(d&&d[f[0]]!=null)?d[f[0]]:f[6];$(f[0]).addEventListener("input",render)});
+ if(d&&d.sah!=null)$("sah").checked=d.sah;if(d&&d.keg)KEG=d.keg;kegUI();$("sah").addEventListener("change",render);
+ render();
+});
+</script>
+</body>
+</html>
