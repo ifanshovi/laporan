@@ -293,12 +293,13 @@ const F=[
 ["simpul","Kesimpulan","p",3,"","C",""],
 ["saran","Saran (satu per baris)","l",2,"","C",""],
 ["s_nomor","Nomor surat (boleh dikosongkan)","t",0,"","S",""],["s_lamp","Lampiran surat","t",0,"","S","-"],
-["s_hal","Perihal surat (kosong = otomatis: Undangan Kegiatan ...)","t",0,"","S",""],["s_tgl","Tanggal surat","d",0,"","S",""],
+["s_jenis","Jenis surat (isi surat menyesuaikan)","s",0,"","S","auto"],
+["s_hal","Perihal surat (kosong = otomatis sesuai jenis; jika jenis \"Otomatis\", isi surat mengikuti kata di perihal)","t",0,"Contoh: Permohonan Izin Kegiatan ...","S",""],["s_tgl","Tanggal surat","d",0,"","S",""],
 ["s_yth","Ditujukan kepada (Yth.), satu baris per baris","p",2,"Contoh: nama jabatan, lalu nama instansi di baris berikutnya","S",""],
 ["s_di","Tempat tujuan surat","t",0,"","S","di Tempat"],
 ["s_jam","Waktu kegiatan (jam)","t",0,"Contoh: Pukul 07.30 WIB s.d. selesai","S",""],
-["s_peran","Peran yang diminta dari yang diundang","t",0,"Contoh: hadir sekaligus menjadi narasumber (kosong = hadir)","S",""],
-["s_isi","Paragraf alasan undangan (opsional)","p",3,"Kosongkan untuk kalimat otomatis","S",""],
+["s_peran","Rincian permohonan / peran (opsional)","t",0,"Undangan: hadir sekaligus menjadi narasumber | Izin: menggunakan lapangan | Bantuan: berupa sound system","S",""],
+["s_isi","Paragraf latar belakang surat (opsional)","p",3,"Kosongkan untuk kalimat otomatis sesuai jenis surat","S",""],
 ["s_hadir","Peserta terisi di daftar hadir (opsional, satu per baris: Nama | Jabatan)","p",3,"","S",""],
 ["s_baris","Jumlah baris daftar hadir (maks. 20)","t",0,"","S","18"],
 ["s_notulis","Nama notulis","t",0,"","S",""],
@@ -368,22 +369,49 @@ const LP=inner=>`<div class="pg sheet cv lt">${kopHTML()}${inner}</div>`;
 const infT=rows=>`<table class="inf">${rows.map(([a,b])=>`<tr><td>${a}</td><td>:</td><td>${b}</td></tr>`).join("")}</table>`;
 const pihakTxt=()=>lines(g("pihak")).join(", ");
 const kegInfo=()=>[["Kegiatan",vv(g("keg"))],["Hari, Tanggal",hariRentang()||DOT],["Waktu",vv(g("s_jam"))],["Tempat",vv(g("tempat"))]];
+const JENIS=[["auto","Otomatis (ikuti kata di perihal)"],["undangan","Undangan kegiatan"],["narasumber","Permohonan narasumber & undangan"],["izin","Permohonan izin"],["bantuan","Permohonan bantuan / dukungan"],["pemberitahuan","Pemberitahuan kegiatan"]];
+const jenisSurat=()=>{const j=g("s_jenis")||"auto";if(j!=="auto")return j;const h=(g("s_hal")||"").toLowerCase();
+ if(/izin|perizinan|rekomendasi/.test(h))return"izin";
+ if(/narasumber|pemateri|pembina/.test(h))return"narasumber";
+ if(/bantuan|dukungan|pinjam|peminjaman|sumbangan|donasi/.test(h))return"bantuan";
+ if(/pemberitahuan|informasi|laporan/.test(h))return"pemberitahuan";
+ return"undangan"};
 function suratHTML(){
- const keg=g("keg"),kt=g("kota")||"Magetan",ts=g("s_tgl")?tgl(g("s_tgl")):DOT;
- const hal=g("s_hal")||(keg?`Undangan Kegiatan "${keg}"`:"");
- const yth=g("s_yth").split(/\n+/).map(x=>x.trim()).filter(Boolean);
- const isi=g("s_isi")?PR(g("s_isi")):`<p>Dalam rangka pelaksanaan kegiatan ${keg?`“${esc(keg)}”`:DOT}, MIN 10 Magetan akan menyelenggarakan kegiatan tersebut di lingkungan madrasah.</p>`;
+ const keg=g("keg"),kt=g("kota")||"Magetan",ts=g("s_tgl")?tgl(g("s_tgl")):DOT,J=jenisSurat();
+ const K=keg?`“${esc(keg)}”`:DOT,kq=keg?`"${keg}"`:"";
+ const HAL={undangan:"Undangan Kegiatan",narasumber:"Undangan & Permohonan Narasumber Kegiatan",izin:"Permohonan Izin Pelaksanaan Kegiatan",bantuan:"Permohonan Bantuan Kegiatan",pemberitahuan:"Pemberitahuan Pelaksanaan Kegiatan"};
+ const hal=g("s_hal")||(keg?`${HAL[J]} ${kq}`:HAL[J]);
+ const yth=g("s_yth").split(/\n+/).map(x=>x.trim()).filter(Boolean),ythT=yth.length?esc(yth.join(" ")):DOT;
+ const peran=g("s_peran").trim();
+ const doa=`<p>Dengan hormat, puji syukur kita panjatkan kehadirat Allah SWT atas rahmat dan karunia-Nya. Semoga Bapak/Ibu senantiasa berada dalam keadaan sehat walafiat serta sukses dalam menjalankan tugas sehari-hari.</p>`;
+ const T={
+ undangan:{buka:doa,latar:`Dalam rangka pelaksanaan kegiatan ${K}, MIN 10 Magetan akan menyelenggarakan kegiatan tersebut di lingkungan madrasah.`,
+  maksud:`Sehubungan dengan hal tersebut, kami bermaksud mengundang Bapak/Ibu ${ythT} (atau perwakilan yang ditunjuk) untuk dapat ${esc(peran||"hadir")} dalam kegiatan yang akan dilaksanakan pada:`,
+  tutup:`Demikian surat undangan ini kami sampaikan. Besar harapan kami Bapak/Ibu berkenan hadir. Atas perhatian, dukungan, dan kerja sama yang baik, kami ucapkan terima kasih.`},
+ narasumber:{buka:doa,latar:`Dalam rangka meningkatkan wawasan dan kepedulian peserta didik melalui kegiatan ${K}, MIN 10 Magetan akan menyelenggarakan kegiatan tersebut di lingkungan madrasah.`,
+  maksud:`Sehubungan dengan hal tersebut, kami bermaksud mengundang Bapak/Ibu ${ythT} (atau perwakilan yang ditunjuk) untuk ${esc(peran||"hadir sekaligus menjadi Narasumber/Pembina")} dalam kegiatan yang akan dilaksanakan pada:`,
+  tutup:`Demikian surat permohonan dan undangan ini kami sampaikan. Besar harapan kami Bapak/Ibu berkenan hadir serta memberikan edukasi dan arahan kepada peserta didik kami. Atas perhatian, dukungan, dan kerja sama yang baik, kami ucapkan terima kasih.`},
+ izin:{buka:`<p>Dengan hormat,</p>`,latar:`Dalam rangka pelaksanaan program madrasah berupa kegiatan ${K}, MIN 10 Magetan merencanakan kegiatan tersebut bagi peserta didik dan warga madrasah.`,
+  maksud:`Sehubungan dengan hal tersebut, dengan ini kami mengajukan permohonan izin kepada Bapak/Ibu ${ythT} untuk ${esc(peran||"melaksanakan kegiatan tersebut")} yang direncanakan pada:`,
+  tutup:`Demikian surat permohonan izin ini kami sampaikan. Besar harapan kami permohonan ini dapat dikabulkan. Atas perhatian, izin, dan kerja sama Bapak/Ibu, kami ucapkan terima kasih.`},
+ bantuan:{buka:`<p>Dengan hormat,</p>`,latar:`Dalam rangka pelaksanaan kegiatan ${K}, MIN 10 Magetan memerlukan dukungan dari berbagai pihak agar kegiatan dapat berjalan dengan lancar.`,
+  maksud:`Sehubungan dengan hal tersebut, kami memohon kesediaan Bapak/Ibu ${ythT} untuk memberikan bantuan/dukungan ${esc(peran||"berupa ........")} pada kegiatan yang akan dilaksanakan pada:`,
+  tutup:`Demikian surat permohonan ini kami sampaikan. Besar harapan kami permohonan ini dapat dikabulkan. Atas perhatian, dukungan, dan kerja sama Bapak/Ibu, kami ucapkan terima kasih.`},
+ pemberitahuan:{buka:`<p>Dengan hormat,</p>`,latar:`Dalam rangka pelaksanaan program madrasah, MIN 10 Magetan akan menyelenggarakan kegiatan ${K}.`,
+  maksud:`Sehubungan dengan hal tersebut, kami memberitahukan kepada Bapak/Ibu ${ythT} bahwa kegiatan tersebut ${peran?esc(peran)+" ":""}akan dilaksanakan pada:`,
+  tutup:`Demikian pemberitahuan ini kami sampaikan. Atas perhatian dan kerja sama Bapak/Ibu, kami ucapkan terima kasih.`}}[J];
+ const isi=g("s_isi")?PR(g("s_isi")):`<p>${T.latar}</p>`;
  const det=[["Hari, Tanggal",hariRentang()||DOT],["Waktu",vv(g("s_jam"))],["Tempat",vv(g("tempat"))],["Tema / Judul",vv(keg)]];
  if(g("pihak"))det.push(["Peserta",esc(pihakTxt())]);
  return LP(`<p style="text-align:right">${esc(kt)}, ${ts}</p>
- ${infT([["<b>Nomor</b>",vv(g("s_nomor"))],["<b>Lampiran</b>",vv(g("s_lamp"))],["<b>Hal</b>",hal?esc(hal):DOT]])}
+ ${infT([["<b>Nomor</b>",vv(g("s_nomor"))],["<b>Lampiran</b>",vv(g("s_lamp"))],["<b>Hal</b>",esc(hal)]])}
  <p style="margin-bottom:0">Yth. ${yth.length?yth.map(esc).join("<br>"):DOT}</p><p>${esc(g("s_di")||"di Tempat")}</p>
  <p>Assalamu’alaikum Warahmatullahi Wabarakatuh,</p>
- <p>Dengan hormat, puji syukur kita panjatkan kehadirat Allah SWT atas rahmat dan karunia-Nya. Semoga Bapak/Ibu senantiasa berada dalam keadaan sehat walafiat serta sukses dalam menjalankan tugas sehari-hari.</p>
+ ${T.buka}
  ${isi}
- <p>Sehubungan dengan hal tersebut, kami bermaksud mengundang Bapak/Ibu ${yth.length?esc(yth.join(" "))+" (atau perwakilan yang ditunjuk)":DOT} untuk dapat ${esc(g("s_peran")||"hadir")} dalam kegiatan yang akan dilaksanakan pada:</p>
+ <p>${T.maksud}</p>
  ${infT(det)}
- <p>Demikian surat undangan ini kami sampaikan. Besar harapan kami Bapak/Ibu berkenan hadir. Atas perhatian, dukungan, dan kerja sama yang baik, kami ucapkan terima kasih.</p>
+ <p>${T.tutup}</p>
  <p>Wassalamu’alaikum Warahmatullahi Wabarakatuh.</p>
  <div class="ttd1">Kepala MIN 10 Magetan,<div class="sp"></div><b>${vv(g("kepala"))}</b><br>NIP. ${vv(g("k_nip"))}</div>`)}
 function hadirHTML(){
@@ -404,7 +432,7 @@ function notulHTML(){
 const suratPages=()=>($("sur1").checked?suratHTML():"")+($("sur2").checked?hadirHTML():"")+($("sur3").checked?notulHTML():"");
 
 function build(){
- const mk=(k)=>(k==="C"?KEYS.map(i=>F.find(f=>f[0]===i)).filter(Boolean):F.filter(f=>f[5]===k)).map(f=>`<label>${f[1].replace(/^\d+\.\s*/,"")}</label>`+(f[3]?`<textarea id="${f[0]}" rows="${f[3]}" placeholder="${f[4]}"></textarea>`:`<input id="${f[0]}" type="${f[2]==="d"?"date":"text"}" placeholder="${f[4]}">`)).join("");
+ const mk=(k)=>(k==="C"?KEYS.map(i=>F.find(f=>f[0]===i)).filter(Boolean):F.filter(f=>f[5]===k)).map(f=>`<label>${f[1].replace(/^\d+\.\s*/,"")}</label>`+(f[2]==="s"?`<select id="${f[0]}">${JENIS.map(j=>`<option value="${j[0]}">${j[1]}</option>`).join("")}</select>`:f[3]?`<textarea id="${f[0]}" rows="${f[3]}" placeholder="${f[4]}"></textarea>`:`<input id="${f[0]}" type="${f[2]==="d"?"date":"text"}" placeholder="${f[4]}">`)).join("");
  const fotoBox=`<div class="box"><h3>Tahap 3 — Foto Kegiatan</h3><input type="file" accept="image/*" multiple onchange="addImg(FOTO,this,1000)"><div id="fl"></div></div>
  <div class="box"><h3>Tahap 4 — Dokumen Pendukung (foto/scan)</h3><input type="file" accept="image/*" multiple onchange="addImg(DOC,this,1600)"><div id="dl"></div></div>`;
  $("colA").innerHTML=`<div class="box"><h3>Tahap 1 — Bahan Kegiatan (isi sederhana)</h3><p style="font-size:12px;color:#475569;margin:0 0 10px">Isi singkat sesuai fakta. Kolom kosong tidak perlu dipaksakan.</p>${mk("A")}</div>`+`<div class="box"><h3>Tahap 2 — Rincian Kegiatan (opsional)</h3><div id="xl"></div><button class="btn g" style="width:100%;margin-top:8px" onclick="KEG.push({k:'',w:'',v:''});kegUI()">+ TAMBAH KEGIATAN</button></div>`+fotoBox;
